@@ -4,8 +4,8 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 
 const isProdEnv = process.env.NODE_ENV === 'production';
-const PUBLIC_PATH = isProdEnv ? process.env.PUBLIC_PATH + "/" + process.env.CHAT_VARIABLE : process.env.PUBLIC_PATH;
-const OUT_DIR = isProdEnv ? 'build/' + process.env.CHAT_VARIABLE : 'build';
+const PUBLIC_PATH = isProdEnv ? '/' : '/';
+const OUT_DIR = 'dist';
 const PLUGINS  = isProdEnv ? [react()] : [
     react(),
     {
