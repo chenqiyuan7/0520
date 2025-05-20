@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 
 const isProdEnv = process.env.NODE_ENV === 'production';
-const PUBLIC_PATH = isProdEnv ? '/' : '/';
+const PUBLIC_PATH = './';
 const OUT_DIR = 'dist';
 const PLUGINS  = isProdEnv ? [react()] : [
     react(),
