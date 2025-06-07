@@ -3,6 +3,23 @@ import { ChevronLeft, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const InteractiveExhibition = () => {
   const [activeFilter, setActiveFilter] = useState("all");
 
@@ -14,7 +31,7 @@ const InteractiveExhibition = () => {
       location: "4楼 展厅A",
       time: "10:00-20:00",
       price: "88元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,exhibition,interactive&width=300&height=300",
+      image: "展览1.jpg",
       waitTime: "15分钟",
       rating: 4.8,
       features: ["互动体验", "科普教育", "适合亲子"],
@@ -30,7 +47,7 @@ const InteractiveExhibition = () => {
       location: "5楼 展厅B",
       time: "09:30-19:30",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=space,exhibition,interactive&width=300&height=300",
+      image: "展览2.jpg",
       waitTime: "20分钟",
       rating: 4.9,
       features: ["VR体验", "科技互动", "科普教育"],
@@ -46,7 +63,7 @@ const InteractiveExhibition = () => {
       location: "3楼 展厅C",
       time: "10:00-19:00",
       price: "78元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,exhibition&width=300&height=300",
+      image: "展览3.jpeg",
       waitTime: "10分钟",
       rating: 4.7,
       features: ["AR互动", "科普教育", "适合亲子"],
@@ -62,7 +79,7 @@ const InteractiveExhibition = () => {
       location: "2楼 展厅D",
       time: "10:30-20:30",
       price: "108元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=digital,art,exhibition&width=300&height=300",
+      image: "展览4.jpeg",
       waitTime: "25分钟",
       rating: 4.6,
       features: ["光影艺术", "沉浸体验", "适合拍照"],
@@ -78,7 +95,7 @@ const InteractiveExhibition = () => {
       location: "6楼 展厅E",
       time: "09:00-18:00",
       price: "128元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=future,technology,exhibition&width=300&height=300",
+      image: "展览5.jpg",
       waitTime: "30分钟",
       rating: 4.9,
       features: ["科技互动", "未来体验", "适合亲子"],
@@ -153,7 +170,7 @@ const InteractiveExhibition = () => {
               <div className="w-[88px]">
                 <div className="h-[88px] w-[88px]">
                   <img 
-                    src={exhibition.image} 
+                    src={getAssetPath(exhibition.image)} 
                     alt={exhibition.title} 
                     className="object-cover w-full h-full rounded-lg"
                   />

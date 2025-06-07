@@ -4,6 +4,23 @@ import { ChevronLeft, Clock, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const KidsActivities = () => {
   const [activeFilter, setActiveFilter] = useState("all");
 
@@ -25,7 +42,7 @@ const KidsActivities = () => {
       location: "4楼 科教中心",
       ageRange: "6-12岁",
       price: "98元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=science,kids,experiment&width=300&height=300",
+      image: "展览4.jpeg",
       waitTime: "5分钟",
       rating: 4.8,
       features: ["科学实验", "互动教学", "适合亲子"],
@@ -43,7 +60,7 @@ const KidsActivities = () => {
       location: "6楼 空中花园",
       ageRange: "4-12岁",
       price: "68元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=outdoor,adventure,kids&width=300&height=300",
+      image: "展览1.jpg",
       waitTime: "10分钟",
       rating: 4.7,
       features: ["户外活动", "探险体验", "适合亲子"],
@@ -61,7 +78,7 @@ const KidsActivities = () => {
       location: "3楼 艺术中心",
       ageRange: "3-15岁",
       price: "128元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=art,studio,kids&width=300&height=300",
+      image: "展览5.jpg",
       waitTime: "15分钟",
       rating: 4.9,
       features: ["艺术创作", "创意体验", "适合亲子"],
@@ -79,7 +96,7 @@ const KidsActivities = () => {
       location: "5楼 教育中心",
       ageRange: "7-14岁",
       price: "158元/课时",
-      image: "https://nocode.meituan.com/photo/search?keyword=coding,kids,education&width=300&height=300",
+      image: "展览3.jpeg",
       waitTime: "20分钟",
       rating: 4.8,
       features: ["编程教育", "互动教学", "适合亲子"],
@@ -97,7 +114,7 @@ const KidsActivities = () => {
       location: "2楼 运动中心",
       ageRange: "3-10岁",
       price: "88元/人",
-      image: "https://nocode.meituan.com/photo/search?keyword=sports,kids,interactive&width=300&height=300",
+      image: "展览2.jpg",
       waitTime: "8分钟",
       rating: 4.7,
       features: ["运动健身", "亲子互动", "适合亲子"],
@@ -169,7 +186,7 @@ const KidsActivities = () => {
               <div className="w-[88px]">
                 <div className="h-[88px] w-[88px]">
                   <img 
-                    src={activity.image} 
+                    src={getAssetPath(activity.image)} 
                     alt={activity.name} 
                     className="object-cover w-full h-full rounded-lg"
                   />

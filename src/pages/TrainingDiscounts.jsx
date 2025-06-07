@@ -3,6 +3,23 @@ import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const TrainingDiscounts = () => {
   const discountPrograms = [
     {
@@ -10,70 +27,70 @@ const TrainingDiscounts = () => {
       name: "小小艺术家绘画班",
       discount: "首课免费 + 报名立减100元",
       location: "3楼 C区 306",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,painting&width=200&height=200"
+      image: "儿童培训1.jpg"
     },
     {
       id: 2,
       name: "乐高创意工作室",
       discount: "新会员8折优惠",
       location: "4楼 A区 412",
-      image: "https://nocode.meituan.com/photo/search?keyword=lego,kids&width=200&height=200"
+      image: "儿童培训2.jpg"
     },
     {
       id: 3,
       name: "小小钢琴家",
       discount: "试课立减50元 + 赠送乐理教材",
       location: "5楼 B区 503",
-      image: "https://nocode.meituan.com/photo/search?keyword=piano,child&width=200&height=200"
+      image: "儿童培训3.jpg"
     },
     {
       id: 4,
       name: "趣味英语俱乐部",
       discount: "买10节课送2节 + 免费测评",
       location: "3楼 D区 315",
-      image: "https://nocode.meituan.com/photo/search?keyword=english,class,kids&width=200&height=200"
+      image: "儿童培训4.jpeg"
     },
     {
       id: 5,
       name: "儿童舞蹈中心",
       discount: "新生报名享85折 + 免费舞蹈服",
       location: "4楼 C区 428",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,dancing&width=200&height=200"
+      image: "儿童培训5.jpg"
     },
     {
       id: 6,
       name: "儿童编程启蒙班",
       discount: "新生立减200元 + 免费体验课",
       location: "5楼 A区 512",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,coding&width=200&height=200"
+      image: "儿童培训6.jpg"
     },
     {
       id: 7,
       name: "迷你篮球训练营",
       discount: "报名即送训练服 + 专业球鞋7折",
       location: "1楼 B区 108",
-      image: "https://nocode.meituan.com/photo/search?keyword=basketball,kids&width=200&height=200"
+      image: "儿童培训1.jpg"
     },
     {
       id: 8,
       name: "幼儿音乐启蒙课",
       discount: "买8节课送1节 + 音乐玩具",
       location: "2楼 C区 215",
-      image: "https://nocode.meituan.com/photo/search?keyword=music,toddler&width=200&height=200"
+      image: "儿童培训2.jpg"
     },
     {
       id: 9,
       name: "青少年书法班",
       discount: "特惠套餐6折 + 赠送文房四宝",
       location: "4楼 D区 401",
-      image: "https://nocode.meituan.com/photo/search?keyword=calligraphy,child&width=200&height=200"
+      image: "儿童培训3.jpg"
     },
     {
       id: 10,
       name: "儿童心理辅导中心",
       discount: "首次咨询半价 + 免费亲子测评",
       location: "6楼 E区 603",
-      image: "https://nocode.meituan.com/photo/search?keyword=psychology,child&width=200&height=200"
+      image: "儿童培训4.jpeg"
     }
   ];
 
@@ -130,7 +147,7 @@ const TrainingDiscounts = () => {
             >
               <div className="aspect-square w-full">
                 <img 
-                  src={program.image} 
+                  src={getAssetPath(program.image)} 
                   alt={program.name} 
                   className="mx-auto object-cover w-full h-full"
                 />

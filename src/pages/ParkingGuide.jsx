@@ -3,12 +3,29 @@ import { ChevronLeft, Car, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 // 使用memo优化卡片组件，避免不必要的重新渲染
 const ParkingCard = memo(({ area, getAvailabilityColor, getAvailabilityText }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-sm">
       <img 
-        src={area.image} 
+        src={getAssetPath(area.image)} 
         alt={area.name} 
         className="mx-auto object-cover w-full h-40"
         loading="lazy" // 添加懒加载
@@ -103,7 +120,7 @@ const ParkingGuide = () => {
           availableSpots: 12,
           nearbyEntrance: "B1电梯口，靠近美食广场",
           specialFeatures: ["残障车位", "充电桩"],
-          image: "/推荐拉面店.png" // 替换为本地图片
+          image: "停车场2.jpeg"
         },
         {
           id: 3,
@@ -113,7 +130,7 @@ const ParkingGuide = () => {
           availableSpots: 35,
           nearbyEntrance: "北门入口，靠近广场",
           specialFeatures: ["亲子车位", "临时停车"],
-          image: "/推荐儿童餐1.png" // 替换为本地图片
+          image: "停车场3.jpg"
         },
         // 减少加载项目数量，只保留3个停车场信息
       ]);

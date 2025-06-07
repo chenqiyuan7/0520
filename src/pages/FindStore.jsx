@@ -3,6 +3,23 @@ import { ChevronLeft, MapPin, Phone, Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const FindStore = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   
@@ -24,7 +41,7 @@ const FindStore = () => {
       location: "3楼 B区 306",
       phone: "400-123-4567",
       openHours: "10:00-22:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=toy,store,kids&width=300&height=200"
+      image: "找店铺1.jpeg"
     },
     {
       id: 2,
@@ -34,7 +51,7 @@ const FindStore = () => {
       location: "2楼 A区 215",
       phone: "400-123-4568",
       openHours: "10:00-22:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,clothing,store&width=300&height=200"
+      image: "找店铺2.jpg"
     },
     {
       id: 3,
@@ -44,7 +61,7 @@ const FindStore = () => {
       location: "1楼 C区 112",
       phone: "400-123-4569",
       openHours: "09:00-21:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=candy,store,kids&width=300&height=200"
+      image: "找店铺3.jpeg"
     },
     {
       id: 4,
@@ -54,7 +71,7 @@ const FindStore = () => {
       location: "4楼 D区 405",
       phone: "400-123-4570",
       openHours: "09:00-20:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=education,center,kids&width=300&height=200"
+      image: "找店铺4.jpg"
     },
     {
       id: 5,
@@ -64,7 +81,7 @@ const FindStore = () => {
       location: "5楼 E区 512",
       phone: "400-123-4571",
       openHours: "10:00-22:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=entertainment,kids,play&width=300&height=200"
+      image: "找店铺5.jpeg"
     },
     {
       id: 6,
@@ -74,7 +91,7 @@ const FindStore = () => {
       location: "3楼 C区 325",
       phone: "400-123-4572",
       openHours: "10:00-21:00",
-      image: "https://nocode.meituan.com/photo/search?keyword=bookstore,kids&width=300&height=200"
+      image: "找店铺6.jpeg"
     }
   ];
 
@@ -137,7 +154,7 @@ const FindStore = () => {
           {filteredStores.map((store) => (
             <div key={store.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
               <img 
-                src={store.image} 
+                src={getAssetPath(store.image)} 
                 alt={store.name} 
                 className="mx-auto object-cover w-full h-40"
               />

@@ -3,6 +3,23 @@ import { ChevronLeft, Clock, Users, MapPin, Star, User, MessageSquare } from "lu
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const RestaurantQueue = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +39,7 @@ const RestaurantQueue = () => {
             location: "4楼 B区 412",
             rating: 4.8,
             tags: ["儿童套餐", "游乐区", "主题派对"],
-            image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300"
+            image: "餐厅1.jpg"
           },
           {
             id: 2,
@@ -32,7 +49,7 @@ const RestaurantQueue = () => {
             location: "3楼 A区 305",
             rating: 4.6,
             tags: ["海洋主题", "互动体验", "儿童餐具"],
-            image: "https://nocode.meituan.com/photo/search?keyword=underwater,restaurant&width=300&height=300"
+            image: "餐厅2.jpg"
           },
           {
             id: 3,
@@ -42,7 +59,7 @@ const RestaurantQueue = () => {
             location: "5楼 C区 508",
             rating: 4.7,
             tags: ["森林主题", "亲子互动", "健康餐饮"],
-            image: "https://nocode.meituan.com/photo/search?keyword=forest,restaurant&width=300&height=300"
+            image: "餐厅3.jpeg"
           },
           {
             id: 4,
@@ -52,7 +69,7 @@ const RestaurantQueue = () => {
             location: "6楼 D区 602",
             rating: 4.5,
             tags: ["科技互动", "太空主题", "创意美食"],
-            image: "https://nocode.meituan.com/photo/search?keyword=space,restaurant&width=300&height=300"
+            image: "餐厅4.jpeg"
           },
           {
             id: 5,
@@ -62,7 +79,7 @@ const RestaurantQueue = () => {
             location: "4楼 E区 423",
             rating: 4.9,
             tags: ["公主主题", "下午茶", "生日派对"],
-            image: "https://nocode.meituan.com/photo/search?keyword=princess,restaurant&width=300&height=300"
+            image: "餐厅5.jpeg"
           },
           {
             id: 6,
@@ -72,7 +89,7 @@ const RestaurantQueue = () => {
             location: "2楼 F区 218",
             rating: 4.7,
             tags: ["农场主题", "亲子互动", "有机食材"],
-            image: "https://nocode.meituan.com/photo/search?keyword=farm,animals,restaurant&width=300&height=300"
+            image: "餐厅6.png"
           }
         ]);
         setLoading(false);
@@ -179,7 +196,7 @@ const RestaurantQueue = () => {
                 <div className="w-[88px]">
                   <div className="h-[88px] w-[88px]">
                     <img 
-                      src={restaurant.image} 
+                      src={getAssetPath(restaurant.image)} 
                       alt={restaurant.name} 
                       className="object-cover w-full h-full rounded-lg"
                     />

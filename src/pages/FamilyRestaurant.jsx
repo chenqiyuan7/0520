@@ -3,6 +3,23 @@ import { ChevronLeft, Star, MapPin, Clock, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
+// 添加资源路径处理函数
+const getAssetPath = (path) => {
+  // 检查路径是否已经是绝对路径
+  if (path.startsWith('http') || path.startsWith('data:')) {
+    return path;
+  }
+  
+  // 获取vite.config.js中配置的base路径
+  const basePath = import.meta.env.BASE_URL || '/';
+  
+  // 确保路径以/开头但不重复
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  
+  // 组合basePath和normalizedPath
+  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
+};
+
 const FamilyRestaurant = () => {
   const [activeFilter, setActiveFilter] = useState("all");
 
@@ -24,7 +41,7 @@ const FamilyRestaurant = () => {
       waitTime: "15分钟",
       features: ["儿童游乐区", "主题派对", "儿童餐具"],
       address: "4楼 B区 412",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,theme,restaurant&width=300&height=300",
+      image: "餐厅1.jpg",
       packages: ["¥198 <s>¥238</s> 亲子双人套餐", "¥288 <s>¥328</s> 生日派对套餐"]
     },
     {
@@ -36,7 +53,7 @@ const FamilyRestaurant = () => {
       waitTime: "30分钟",
       features: ["海洋主题", "互动体验", "寿司体验"],
       address: "3楼 A区 305",
-      image: "https://nocode.meituan.com/photo/search?keyword=ocean,theme,restaurant&width=300&height=300",
+      image: "餐厅2.jpg",
       packages: ["¥258 <s>¥298</s> 海鲜双人套餐", "¥88 <s>¥108</s> 儿童套餐"]
     },
     {
@@ -48,7 +65,7 @@ const FamilyRestaurant = () => {
       waitTime: "20分钟",
       features: ["DIY美食", "厨艺课堂", "亲子互动"],
       address: "5楼 C区 508",
-      image: "https://nocode.meituan.com/photo/search?keyword=kids,cooking,restaurant&width=300&height=300",
+      image: "餐厅3.jpeg",
       packages: ["¥168 <s>¥198</s> 小厨师体验套餐", "¥328 <s>¥398</s> 家庭聚餐套餐"]
     },
     {
@@ -60,7 +77,7 @@ const FamilyRestaurant = () => {
       waitTime: "10分钟",
       features: ["甜品DIY", "生日派对", "下午茶"],
       address: "2楼 D区 203",
-      image: "https://nocode.meituan.com/photo/search?keyword=candy,dessert,cafe&width=300&height=300",
+      image: "餐厅5.jpeg",
       packages: ["¥138 <s>¥158</s> 下午茶套餐", "¥168 <s>¥188</s> 甜品DIY套餐"]
     },
     {
@@ -72,7 +89,7 @@ const FamilyRestaurant = () => {
       waitTime: "25分钟",
       features: ["农场体验", "有机食材", "亲子互动"],
       address: "1楼 G区 108",
-      image: "https://nocode.meituan.com/photo/search?keyword=farm,restaurant&width=300&height=300",
+      image: "餐厅4.jpeg",
       packages: ["¥198 <s>¥228</s> 田园亲子套餐", "¥238 <s>¥268</s> 农场采摘套餐"]
     },
     {
@@ -84,7 +101,7 @@ const FamilyRestaurant = () => {
       waitTime: "20分钟",
       features: ["恐龙主题", "科普教育", "儿童套餐"],
       address: "3楼 H区 325",
-      image: "https://nocode.meituan.com/photo/search?keyword=dinosaur,restaurant&width=300&height=300",
+      image: "餐厅6.png",
       packages: ["¥188 <s>¥218</s> 探索者套餐", "¥268 <s>¥298</s> 恐龙主题套餐"]
     }
   ];
@@ -156,7 +173,7 @@ const FamilyRestaurant = () => {
                 <div className="w-[88px]">
                   <div className="h-[88px] w-[88px]">
                     <img 
-                      src={restaurant.image} 
+                      src={getAssetPath(restaurant.image)} 
                       alt={restaurant.name} 
                       className="object-cover w-full h-full rounded-lg"
                     />
