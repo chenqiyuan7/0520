@@ -110,21 +110,21 @@ const Index = () => {
     {
       id: 1,
       title: "互动展览",
-      count: "20个问题",
+      count: "243人问过",
       icon: "https://nocode.meituan.com/photo/search?keyword=interactive,exhibition&width=100&height=100",
       path: "/interactive-exhibition"
     },
     {
       id: 2,
       title: "亲子餐厅",
-      count: "12个问题",
+      count: "218人问过",
       icon: "https://nocode.meituan.com/photo/search?keyword=family,restaurant&width=100&height=100",
       path: "/family-restaurant"
     },
     {
       id: 3,
       title: "省心遛娃",
-      count: "9个问题",
+      count: "89人问过",
       icon: "https://nocode.meituan.com/photo/search?keyword=kids,play&width=100&height=100",
       path: "/kids-activities"
     }

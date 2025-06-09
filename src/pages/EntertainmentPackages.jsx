@@ -35,7 +35,7 @@ const EntertainmentPackages = () => {
       discountPrice: 198,
       validPeriod: "购买后60天内有效",
       peopleCount: "2大1小",
-      image: "https://nocode.meituan.com/photo/search?keyword=family,dining&width=300&height=200"
+      image: "/展览1.jpg"
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ const EntertainmentPackages = () => {
       discountPrice: 128,
       validPeriod: "购买后90天内有效",
       peopleCount: "2大1小",
-      image: "https://nocode.meituan.com/photo/search?keyword=movie,family&width=300&height=200"
+      image: "/展览2.jpg"
     },
     {
       id: 4,
@@ -57,7 +57,7 @@ const EntertainmentPackages = () => {
       discountPrice: 258,
       validPeriod: "购买后45天内有效",
       peopleCount: "2大1小",
-      image: "https://nocode.meituan.com/photo/search?keyword=water,park,family&width=300&height=200"
+      image: "/展览3.jpeg"
     },
     {
       id: 5,
@@ -68,7 +68,7 @@ const EntertainmentPackages = () => {
       discountPrice: 188,
       validPeriod: "购买后60天内有效",
       peopleCount: "2大1小",
-      image: "https://nocode.meituan.com/photo/search?keyword=science,museum,kids&width=300&height=200"
+      image: "/展览4.jpeg"
     },
     {
       id: 6,
@@ -79,7 +79,7 @@ const EntertainmentPackages = () => {
       discountPrice: 458,
       validPeriod: "仅限周末使用，购买后60天内有效",
       peopleCount: "2大2小",
-      image: "https://nocode.meituan.com/photo/search?keyword=weekend,family,fun&width=300&height=200"
+      image: "/展览5.jpg"
     }
   ];
 
@@ -191,11 +191,6 @@ const EntertainmentPackages = () => {
             </div>
           )}
         </div>
-      </div>
-
-      {/* 底部提示 */}
-        <div className="fixed bottom-16 left-0 right-0 mx-auto max-w-[375px] bg-white p-4 shadow-lg text-center">
-        <p className="text-sm text-gray-600">套票详情请以购买页面为准，部分套票需提前预约</p>
       </div>
 
       {/* 底部聊天输入框 */}

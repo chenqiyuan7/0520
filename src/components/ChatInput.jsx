@@ -9,10 +9,9 @@ const ChatInput = ({ hasDrawerOpen = false, hasSanqingtanDrawerOpen = false }) =
   const anyDrawerOpen = hasDrawerOpen || hasSanqingtanDrawerOpen;
 
   const quickLinks = [
-    { id: 1, text: "亲子餐厅", path: "/family-restaurant" },
-    { id: 2, text: "停车引导", path: "/parking-guide" },
-    { id: 3, text: "找店铺", path: "/find-store" },
-    { id: 4, text: "吃喝玩乐套票", path: "/entertainment-packages" }
+    { id: 1, text: "停车引导", path: "/parking-guide" },
+    { id: 2, text: "找店铺", path: "/find-store" },
+    { id: 3, text: "吃喝玩乐套票", path: "/entertainment-packages" }
   ];
 
   return (
