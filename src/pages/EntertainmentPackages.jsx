@@ -3,23 +3,6 @@ import { ChevronLeft, Tag, Calendar, Users, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 import ChatInput from "../components/ChatInput";
 
-// 添加资源路径处理函数
-const getAssetPath = (path) => {
-  // 检查路径是否已经是绝对路径
-  if (path.startsWith('http') || path.startsWith('data:')) {
-    return path;
-  }
-  
-  // 获取vite.config.js中配置的base路径
-  const basePath = import.meta.env.BASE_URL || '/';
-  
-  // 确保路径以/开头但不重复
-  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
-  
-  // 组合basePath和normalizedPath
-  return `${basePath.endsWith('/') ? basePath.slice(0, -1) : basePath}${normalizedPath}`;
-};
-
 const EntertainmentPackages = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   
@@ -52,7 +35,7 @@ const EntertainmentPackages = () => {
       discountPrice: 198,
       validPeriod: "购买后60天内有效",
       peopleCount: "2大1小",
-      image: "餐厅3.jpeg"
+      image: "https://nocode.meituan.com/photo/search?keyword=family,dining&width=300&height=200"
     },
     {
       id: 3,
@@ -63,7 +46,7 @@ const EntertainmentPackages = () => {
       discountPrice: 128,
       validPeriod: "购买后90天内有效",
       peopleCount: "2大1小",
-      image: "展览4.jpeg"
+      image: "https://nocode.meituan.com/photo/search?keyword=movie,family&width=300&height=200"
     },
     {
       id: 4,
@@ -74,7 +57,7 @@ const EntertainmentPackages = () => {
       discountPrice: 258,
       validPeriod: "购买后45天内有效",
       peopleCount: "2大1小",
-      image: "展览1.jpg"
+      image: "https://nocode.meituan.com/photo/search?keyword=water,park,family&width=300&height=200"
     },
     {
       id: 5,
@@ -85,7 +68,7 @@ const EntertainmentPackages = () => {
       discountPrice: 188,
       validPeriod: "购买后60天内有效",
       peopleCount: "2大1小",
-      image: "展览5.jpg"
+      image: "https://nocode.meituan.com/photo/search?keyword=science,museum,kids&width=300&height=200"
     },
     {
       id: 6,
@@ -96,7 +79,7 @@ const EntertainmentPackages = () => {
       discountPrice: 458,
       validPeriod: "仅限周末使用，购买后60天内有效",
       peopleCount: "2大2小",
-      image: "展览3.jpeg"
+      image: "https://nocode.meituan.com/photo/search?keyword=weekend,family,fun&width=300&height=200"
     }
   ];
 
@@ -160,7 +143,7 @@ const EntertainmentPackages = () => {
             <div key={pkg.id} className="bg-white rounded-lg overflow-hidden shadow-sm">
               <div className="relative">
                 <img 
-                  src={getAssetPath(pkg.image)} 
+                  src={pkg.image} 
                   alt={pkg.name} 
                   className="mx-auto object-cover w-full h-48"
                 />
